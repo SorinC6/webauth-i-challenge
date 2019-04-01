@@ -41,6 +41,7 @@ class Register extends Component {
 	render() {
 		return (
 			<div>
+				<h1 style={{ textAlign: 'center' }}>REGISTER</h1>
 				<Form onSubmit={this.onRegister}>
 					<input
 						placeholder="username"

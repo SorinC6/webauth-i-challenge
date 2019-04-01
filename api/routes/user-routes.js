@@ -25,7 +25,7 @@ function restricted(req, res, next) {
 		res.status(400).json({ error: 'plese provide username and password' });
 	}
 }
-router.get('/api/users', restricted, (req, res) => {
+router.get('/api/users', (req, res) => {
 	db
 		.getAllUsers()
 		.then((users) => {
