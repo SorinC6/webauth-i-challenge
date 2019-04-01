@@ -29,7 +29,10 @@ router.post('/api/login', (req, res) => {
 		.first()
 		.then((user) => {
 			if (user && bcrypt.compareSync(password, user.password)) {
-				res.status(200).json({ message: `Welcome ${user.username}!` });
+				res.status(200).json({
+					message: `Welcome ${user.username}!`,
+					token: user.password
+				});
 			} else {
 				res.status(401).json({ message: 'Invalid Credentials' });
 			}
@@ -38,5 +41,7 @@ router.post('/api/login', (req, res) => {
 			res.status(500).json(error);
 		});
 });
+
+
 
 module.exports = router;
