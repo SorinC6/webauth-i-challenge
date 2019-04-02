@@ -14,6 +14,7 @@ router.post('/api/register', (req, res) => {
 	dbUser
 		.addUser(user)
 		.then((saved) => {
+			req.session.user = saved;
 			res.status(200).json(saved);
 		})
 		.catch((error) => {
@@ -29,6 +30,7 @@ router.post('/api/login', (req, res) => {
 		.first()
 		.then((user) => {
 			if (user && bcrypt.compareSync(password, user.password)) {
+				req.session.user = user;
 				res.status(200).json({
 					message: `Welcome ${user.username}!`,
 					token: user.password
@@ -41,6 +43,5 @@ router.post('/api/login', (req, res) => {
 			res.status(500).json(error);
 		});
 });
-
 
 module.exports = router;
