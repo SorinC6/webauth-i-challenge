@@ -10,7 +10,7 @@ class App extends Component {
 		const loggedIn = localStorage.getItem('token');
 		return (
 			<div>
-
+				<Route exact path="/" render={() => (loggedIn ? <Redirect to="/users" /> : <Login />)} />
 
 				<Route path="/login" component={Login} />
 				<Route path="/register" component={Register} />
@@ -21,3 +21,4 @@ class App extends Component {
 }
 
 export default App;
+ 
