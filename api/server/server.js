@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+const SessionStore = require('connect-session-knex')(session);
 
 //routes import - nothing for now
 const authRoutes = require('../routes/auth-routes');
@@ -18,8 +19,15 @@ const sessionConfig = {
 	},
 	httpOnly: true,
 	resave: false, //don't crecreate the sesion
-	saveUninitialized: false // don't save anything unsless its change
+	saveUninitialized: false, // don't save anything unsless its change
 	//this is to get persistance
+	store: new SessionStore({
+		knex: require('../../database/dbConfig'),
+		tablename: 'active_sessions',
+		sidfieldname: 'sid',
+		createtable: true,
+		clearInterval: 1000 * 60 * 60
+	})
 };
 
 server.use(cors());
