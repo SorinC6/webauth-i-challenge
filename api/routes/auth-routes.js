@@ -44,4 +44,9 @@ router.post('/api/login', (req, res) => {
 		});
 });
 
+router.get('/api/logout', (req, res) => {
+	req.session.destroy();
+	res.end();
+});
+
 module.exports = router;
