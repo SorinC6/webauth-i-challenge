@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require('../../database/users-model');
 const restricted = require('../routes/restricted-middleware');
 
-router.get('/api/users', restricted, (req, res) => {
+router.get('/api/users', (req, res) => {
 	db
 		.getAllUsers()
 		.then((users) => {
